@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="20240921-1" author="dzyk" logicalFilePath="demo.20240921-1-add_themes.xml">
+        <comment>
+            Добавление Тем изучения
+        </comment>
+
+        <insert tableName="theme">
+            <column name="id" value="1"/>
+            <column name="name" value="Базовые знания Docker"/>
+            <column name="active" value="true"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+
+        <insert tableName="theme">
+            <column name="id" value="2"/>
+            <column name="name" value="Базовые знания Kubernetes"/>
+            <column name="active" value="true"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+
+        <insert tableName="theme">
+            <column name="id" value="3"/>
+            <column name="name" value="Тестовая секция (DEVELOP)"/>
+            <column name="active" value="true"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

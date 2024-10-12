@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="20240831-1" author="dzyk" logicalFilePath="db.20240831-1-create_theme.xml">
+        <comment>
+            Создание таблицы theme
+        </comment>
+
+        <createTable remarks="Список тем для обучения" tableName="theme">
+
+            <column name="ID" remarks="Идентификатор" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="NAME" remarks="Наименование темы" type="VARCHAR2(2048)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ACTIVE" remarks="Статус темы (активна/в разработке)" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="CREATED" remarks="Дата создания" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="UPDATED" remarks="Дата изменения" type="TIMESTAMP">
+                <constraints nullable="true"/>
+            </column>
+
+        </createTable>
+        <addPrimaryKey columnNames="ID" constraintName="theme_id_pk" tableName="theme"/>
+        <createSequence incrementBy="1" minValue="1" sequenceName="theme_seq"/>
+    </changeSet>
+</databaseChangeLog>

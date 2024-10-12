@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="20240921-2" author="dzyk" logicalFilePath="demo.20240921-2-add_tasks.xml">
+        <comment>
+            Добавление заданий
+        </comment>
+
+        <insert tableName="task">
+            <column name="id" value="1"/>
+            <column name="name" value="Инструкция FROM"/>
+            <column name="active" value="true"/>
+            <column name="data" value="{
+  &quot;engine_type&quot;: &quot;docker&quot;,
+  &quot;description&quot;: &quot;Вы разработали новый сервис на Java 17. Вам необходимо создать Docker образ с вашим приложением, но ваш руководитель в данной задаче настоял, чтобы размер данного образа не превышал 200Mb. Вам необходимо подобрать такой базовый образ, чтобы уложиться в эти размеры. Дополните приведенный пример.&quot;,
+  &quot;request_data&quot;: {
+    &quot;main&quot;: &quot;FROM ...\n\nADD app.jar /opt\n\nCMD exec java -jar /opt/app.jar&quot;,
+    &quot;context_path&quot;: &quot;./contexts/base/case1/&quot;
+  },
+  &quot;test_cases&quot;: [
+    {
+      &quot;case_id&quot;: 1,
+      &quot;case_type&quot;: &quot;context&quot;,
+      &quot;context&quot;: {
+        &quot;Field&quot;: &quot;$.Size&quot;,
+        &quot;Operator&quot;: &quot;&lt;&quot;,
+        &quot;Value&quot;: &quot;209715200&quot;
+      }
+    }
+  ]
+}"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+
+        <insert tableName="task">
+            <column name="id" value="2"/>
+            <column name="name" value="Инструкция RUN"/>
+            <column name="active" value="true"/>
+            <column name="data" value="{}"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+
+        <insert tableName="task">
+            <column name="id" value="3"/>
+            <column name="name" value="Инструкция ADD"/>
+            <column name="active" value="true"/>
+            <column name="data" value="{}"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+
+        <insert tableName="task">
+            <column name="id" value="4"/>
+            <column name="name" value="Инструкция LABEL"/>
+            <column name="active" value="true"/>
+            <column name="data" value="{}"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+
+        <insert tableName="task">
+            <column name="id" value="5"/>
+            <column name="name" value="Инструкция WORKDIR"/>
+            <column name="active" value="true"/>
+            <column name="data" value="{}"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+
+        <insert tableName="task">
+            <column name="id" value="6"/>
+            <column name="name" value="Инструкция ARG"/>
+            <column name="active" value="true"/>
+            <column name="data" value="{}"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+
+        <insert tableName="task">
+            <column name="id" value="7"/>
+            <column name="name" value="Использование multistage формата"/>
+            <column name="active" value="true"/>
+            <column name="data" value="{}"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+
+        <insert tableName="task">
+            <column name="id" value="8"/>
+            <column name="name" value="Создание Pod"/>
+            <column name="active" value="true"/>
+            <column name="data" value="{}"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+
+        <insert tableName="task">
+            <column name="id" value="9"/>
+            <column name="name" value="Создание Service"/>
+            <column name="active" value="true"/>
+            <column name="data" value="{}"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+
+        <insert tableName="task">
+            <column name="id" value="10"/>
+            <column name="name" value="Создание Ingress"/>
+            <column name="active" value="true"/>
+            <column name="data" value="{}"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+
+        <insert tableName="task">
+            <column name="id" value="11"/>
+            <column name="name" value="Отладка описания теста"/>
+            <column name="active" value="true"/>
+            <column name="data" value="{}"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+
+        <insert tableName="task">
+            <column name="id" value="12"/>
+            <column name="name" value="Отображение примера задачи"/>
+            <column name="active" value="true"/>
+            <column name="data" value="{}"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+
+        <insert tableName="task">
+            <column name="id" value="13"/>
+            <column name="name" value="Проверка отображения тестов"/>
+            <column name="active" value="true"/>
+            <column name="data" value="{}"/>
+            <column name="created" value="2024-09-21 19:00:00"/>
+            <column name="updated" value="2024-09-21 19:00:00"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>

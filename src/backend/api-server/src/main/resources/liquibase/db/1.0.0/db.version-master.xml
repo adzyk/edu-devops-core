@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <include file="db.20240831-1-create_theme.xml" relativeToChangelogFile="true"/>
+    <include file="db.20240831-2-create_list.xml" relativeToChangelogFile="true"/>
+    <include file="db.20240831-3-create_task.xml" relativeToChangelogFile="true"/>
+    <include file="db.20240831-4-create_internal_user.xml" relativeToChangelogFile="true"/>
+    <include file="db.20240831-5-create_user_progress.xml" relativeToChangelogFile="true"/>
+    <include file="db.20240919-6-create_job.xml" relativeToChangelogFile="true"/>
+    <include file="db.20240919-7-create_journal.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

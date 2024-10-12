@@ -1,0 +1,22 @@
+{
+  "job_id": 1,
+  "engine_type": "docker_buildx",
+  "request_data": {
+    "main": "FROM python:3.8-alpine\nADD https://gitflic.ru/project/dzyk/demo-flask.git /app\nWORKDIR /app\nRUN pip install -r requirements.txt\nCOPY . /app\nENTRYPOINT [\"python\"]\nCMD [\"main.py\"]",
+    "context_path": "./contexts/base/case2/"
+  },
+  "test_cases": [
+    {
+      "case_id":   1,
+      "case_type": "request",
+      "context": {
+        "container_port": 5000,
+        "url_path": "/hello",
+        "request_body": "",
+        "type_request": "GET",
+        "expected_code": 200,
+        "expected_body": "Hello!"
+      }
+    }
+  ]
+}

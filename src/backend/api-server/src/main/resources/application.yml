@@ -1,0 +1,45 @@
+server:
+  port: 8082
+
+spring:
+
+  application:
+    name: ApiServer
+  main:
+    banner-mode: off
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/education_system
+    username: postgres
+    password: postgres
+
+  jpa:
+    profiles:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: validate
+    mapping-resources:
+      - mappings/job.xml
+      - mappings/task.xml
+      - mappings/theme.xml
+      - mappings/internal_user.xml
+      - mappings/user_progress.xml
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://portal.local:8080/keycloak/realms/edu-portal
+
+kafka:
+  address: "127.0.0.1:29092"
+
+logging:
+  level:
+    org:
+      hibernate:
+        orm.jdbc.bind: trace
+        SQL: debug
+

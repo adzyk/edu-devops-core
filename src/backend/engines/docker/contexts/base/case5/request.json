@@ -1,0 +1,22 @@
+{
+  "job_id": 1,
+  "engine_type": "docker",
+  "request_data": {
+    "main": "FROM golang:1.22.5 AS build\nWORKDIR /go/src/\nCOPY . .\nRUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags=\"-w -s\" -o case5 case5.go\n\nFROM scratch\n\nCOPY --from=build /go/src/case5 .\n\nENTRYPOINT [\"/case5\"]",
+    "context_path": "./contexts/base/case5/"
+  },
+  "test_cases": [
+    {
+      "case_id":   1,
+      "case_type": "request",
+      "context": {
+        "container_port": 8080,
+        "url_path": "/ping",
+        "request_body": "",
+        "type_request": "GET",
+        "expected_code": 200,
+        "expected_body": "pong"
+      }
+    }
+  ]
+}

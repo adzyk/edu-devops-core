@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="20240919-6" author="dzyk" logicalFilePath="db.20240919-6-create_run.xml">
+        <comment>
+            Создание таблицы job
+        </comment>
+
+        <createTable remarks="Запускаемые пользователями задачи" tableName="job">
+
+            <column name="ID" remarks="Идентификатор" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="USER_ID" remarks="Идентификатор пользователя" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="TASK_ID" remarks="Идентификатор задачи" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="STATUS" remarks="Статус задачи" type="VARCHAR2(30)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="TASK_REQUEST" remarks="Решение задачи пользователем" type="varchar(2048)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="TASK_RESPONSE" remarks="Ответ от Engine-компонента" type="varchar(2048)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="RESULT" remarks="Результат выполнения задачи (выполнена правильно/нет)" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="LAST_DATE" remarks="Последнее время обновления" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+        <addPrimaryKey columnNames="ID" constraintName="run_id_pk" tableName="job"/>
+        <createSequence incrementBy="1" minValue="1" sequenceName="run_seq" startValue="1"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.2"
+                 xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+                 http://xmlns.jcp.org/xml/ns/persistence/orm/orm_2_2.xsd">
+
+    <package>ru.oa2.edu.api.domain.theme</package>
+
+    <entity class="ru.oa2.edu.api.domain.user.User">
+        <table name="internal_user"/>
+
+        <attributes>
+            <id name="id">
+                <column name="id"/>
+                <generated-value strategy="IDENTITY"/>
+            </id>
+
+            <basic name="internalId">
+                <column name="internal_id"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

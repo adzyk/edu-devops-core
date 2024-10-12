@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.2"
+                 xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+                 http://xmlns.jcp.org/xml/ns/persistence/orm/orm_2_2.xsd">
+
+    <package>ru.oa2.edu.api.domain.theme</package>
+
+    <entity class="ru.oa2.edu.api.domain.task.Task">
+        <table name="task"/>
+
+        <attributes>
+            <id name="id">
+                <column name="id"/>
+                <generated-value strategy="IDENTITY"/>
+            </id>
+
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            
+            <basic name="data">
+                <column name="data" nullable="false"/>
+            </basic>
+            
+            <basic name="active">
+                <column name="active" nullable="false"/>
+            </basic>
+            
+            <basic name="created">
+                <column name="created" nullable="false"/>
+            </basic>
+
+            <basic name="updated">
+                <column name="updated" nullable="true"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

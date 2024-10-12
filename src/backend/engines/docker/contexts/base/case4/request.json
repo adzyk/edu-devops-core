@@ -1,0 +1,22 @@
+{
+  "job_id": 1,
+  "engine_type": "docker",
+  "request_data": {
+    "main": "FROM openjdk:21\n\nADD app.jar /opt\n\nWORKDIR /opt\n\nCMD [\"/usr/bin/java\", \"-jar\", \"app.jar\"]",
+    "context_path": "./contexts/base/case4/"
+  },
+  "test_cases": [
+    {
+      "case_id":   1,
+      "case_type": "request",
+      "context": {
+        "container_port": 8500,
+        "url_path": "/health",
+        "request_body": "",
+        "type_request": "GET",
+        "expected_code": 200,
+        "expected_body": ""
+      }
+    }
+  ]
+}

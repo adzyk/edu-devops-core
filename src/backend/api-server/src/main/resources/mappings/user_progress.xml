@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.2"
+                 xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+                 http://xmlns.jcp.org/xml/ns/persistence/orm/orm_2_2.xsd">
+    <package>ru.oa2.edu.api.domain.theme</package>
+    
+    <entity class="ru.oa2.edu.api.domain.user.UserProgress">
+        <table name="user_progress"/>
+        
+        <attributes>
+            <id name="id">
+                <column name="id"/>
+                <generated-value strategy="IDENTITY"/>
+            </id>
+            
+            <basic name="count">
+                <column name="count" nullable="false"/>
+            </basic>
+
+            <basic name="done">
+                <column name="done" nullable="false"/>
+            </basic>
+
+            <many-to-one name="user" target-entity="ru.oa2.edu.api.domain.user.User" fetch="LAZY">
+                <join-column name="user_id" referenced-column-name="id" insertable="false" updatable="false"/>
+            </many-to-one>
+
+            <many-to-one name="theme" target-entity="Theme" fetch="LAZY">
+                <join-column name="theme_id" referenced-column-name="id" insertable="false" updatable="false"/>
+            </many-to-one>
+
+            <many-to-one name="task" target-entity="ru.oa2.edu.api.domain.task.Task" fetch="LAZY">
+                <join-column name="task_id" referenced-column-name="id" insertable="false" updatable="false"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+</entity-mappings>

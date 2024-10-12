@@ -1,0 +1,26 @@
+{
+  "task_id": 1,
+  "job_id": 1,
+  "engine_type": "docker",
+  "description": "В отделе был разработан сервис на Java. Теперь нужно опубликовать его на тестовом стенде, на котором используется Kubernetes. Чтобы его опубликовать - необходимо запаковать его в Docker-контейнер. Вам неоходимо выбрать базовый образ для будущего образа. Но есть условие, чтобы размер образа не был больше 100Mb",
+  "examples": {
+    "main": "FROM ...\n\nADD app.jar /opt\n\nCMD exec java -jar /opt/app.jar"
+  },
+  "tags": [
+    "docker",
+    "FROM"
+  ],
+  "author": "Anton Dzyk",
+  "task_template": null,
+  "test_cases": [
+    {
+      "case_id": 1,
+      "case_type": "context",
+      "context": {
+        "Field": "$.Size",
+        "Operator": "<",
+        "Value": "107374182400"
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "job_id": 1,
+  "engine_type": "docker",
+  "request_data": {
+    "main": "FROM openjdk:17\n\nLABEL org.opencontainers.image.authors=\"Anton Dzyk\"\n\nADD app.jar /opt\n\nCMD exec java -jar /opt/app.jar",
+    "context_path": "./contexts/base/case2/"
+  },
+  "test_cases": [
+    {
+      "case_id": 1,
+      "case_type": "context",
+      "context": {
+        "Field": "$.Config.Labels",
+        "Operator": "=",
+        "Value": "org.opencontainers.image.authors=Anton Dzyk"
+      }
+    }
+  ]
+}

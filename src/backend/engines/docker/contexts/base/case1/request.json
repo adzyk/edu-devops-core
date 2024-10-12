@@ -1,0 +1,19 @@
+{
+  "job_id": 1,
+  "engine_type": "docker",
+  "request_data": {
+    "main": "FROM eclipse-temurin:17-jre-alpine\n\nADD app.jar /opt\n\nCMD exec java -jar /opt/app.jar",
+    "context_path": "./contexts/base/case1/"
+  },
+  "test_cases": [
+    {
+      "case_id": 1,
+      "case_type": "context",
+      "context": {
+        "Field": "$.Size",
+        "Operator": "<",
+        "Value": "209715200"
+      }
+    }
+  ]
+}

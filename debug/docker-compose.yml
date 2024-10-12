@@ -1,0 +1,102 @@
+name: education-system
+
+services:
+  postgres:
+    container_name: edu_postgres
+    image: postgres:${POSTGRESQL_VERSION}
+    restart: always
+    volumes:
+      - education_system_postgres:/var/lib/postgresql/data
+      - ./configs/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+    ports:
+      - "5432:5432"
+    networks:
+      - education_system
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+  keycloak:
+    container_name: edu_keycloak
+    restart: on-failure:5
+    image: quay.io/keycloak/keycloak:${KEYCLOAK_VERSION}
+    environment:
+      KC_LOG_LEVEL: debug
+      KC_DB: postgres
+      KC_DB_URL: 'jdbc:postgresql://postgres:5432/keycloak'
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak
+      KC_DB_SCHEMA: public
+      KC_HOSTNAME: portal.local
+      KC_HOSTNAME_PATH: keycloak
+      KC_HTTP_RELATIVE_PATH: keycloak
+      KC_HTTP_ENABLED: true
+      HTTP_ADDRESS_FORWARDING: true
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - '8080:8080'
+    command: start-dev
+    networks:
+      - education_system
+    depends_on:
+      - postgres
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:${KAFKA_IMAGE_VERSION}
+    container_name: edu_zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:${KAFKA_IMAGE_VERSION}
+    container_name: edu_kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "29092:29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  init-kafka:
+    container_name: edu_init_kafka
+    image: confluentinc/cp-kafka:${KAFKA_IMAGE_VERSION}
+    depends_on:
+      - kafka
+    entrypoint: [ '/bin/sh', '-c' ]
+    command: |
+      "
+      kafka-topics --bootstrap-server kafka:9092 --create --if-not-exists --topic edu_task_docker --replication-factor 1 --partitions 1
+      kafka-topics --bootstrap-server kafka:9092 --create --if-not-exists --topic edu_results --replication-factor 1 --partitions 1
+
+      kafka-topics --bootstrap-server kafka:9092 --list
+      "
+
+  kafka-ui:
+    container_name: edu_kafka_ui
+    image: provectuslabs/kafka-ui:v0.7.2
+    ports:
+      - 8001:8080
+    depends_on:
+      - kafka
+      - zookeeper
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_METRICS_PORT: 9997
+
+volumes:
+  education_system_postgres:
+    name: education_system
+    driver: local
+
+networks:
+  education_system:
+    name: education-system

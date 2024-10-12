@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.2"
+                 xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+                 http://xmlns.jcp.org/xml/ns/persistence/orm/orm_2_2.xsd">
+
+    <package>ru.oa2.edu.api.domain.theme</package>
+    
+    <entity class="ru.oa2.edu.api.domain.job.Job">
+        <table name="job"/>
+        
+        <attributes>
+            <id name="id">
+                <column name="id"/>
+                <generated-value strategy="IDENTITY"/>
+            </id>
+            
+            <basic name="status">
+                <column name="status" nullable="false"/>
+                <enumerated>STRING</enumerated>
+            </basic>
+
+            <basic name="taskRequest">
+                <column name="task_request" nullable="false"/>
+            </basic>
+
+            <basic name="taskResponse">
+                <column name="task_response" nullable="true"/>
+            </basic>
+
+            <basic name="result">
+                <column name="result" nullable="false"/>
+            </basic>
+
+            <basic name="lastDate">
+                <column name="last_date" nullable="false"/>
+            </basic>
+
+            <many-to-one name="user" target-entity="ru.oa2.edu.api.domain.user.User" fetch="LAZY">
+                <join-column name="user_id" referenced-column-name="id" insertable="true" updatable="false"/>
+            </many-to-one>
+
+            <many-to-one name="task" target-entity="ru.oa2.edu.api.domain.task.Task" fetch="LAZY">
+                <join-column name="task_id" referenced-column-name="id" insertable="true" updatable="false"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+</entity-mappings>

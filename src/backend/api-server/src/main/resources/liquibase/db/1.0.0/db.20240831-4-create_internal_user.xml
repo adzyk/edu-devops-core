@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="20240831-4" author="dzyk" logicalFilePath="db.20240831-4-create_user.xml">
+        <comment>
+            Создание таблицы user
+        </comment>
+
+        <createTable remarks="Список пользователей" tableName="internal_user">
+
+            <column name="ID" remarks="Идентификатор" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="INTERNAL_ID" remarks="Внешний идентификатор пользователя" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+        <addPrimaryKey columnNames="ID" constraintName="user_id_pk" tableName="internal_user"/>
+        <createSequence incrementBy="1" minValue="1" sequenceName="user_seq" startValue="1"/>
+    </changeSet>
+</databaseChangeLog>

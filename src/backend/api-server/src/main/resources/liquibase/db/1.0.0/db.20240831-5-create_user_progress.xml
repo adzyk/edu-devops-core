@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="20240831-5" author="dzyk" logicalFilePath="db.20240831-5-create_user_progress.xml">
+        <comment>
+            Создание таблицы user_progress
+        </comment>
+
+        <createTable remarks="Прогресс пользователей" tableName="user_progress">
+
+            <column name="ID" remarks="Идентификатор" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="USER_ID" remarks="Идентификатор пользователя" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="THEME_ID" remarks="ID темы" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="TASK_ID" remarks="ID задачи" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="COUNT" remarks="Количество попыток проверки задачи" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="DONE" remarks="Результат прохождения задачи" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+        <addPrimaryKey columnNames="ID" constraintName="user_progress_id_pk" tableName="user_progress"/>
+        <createSequence incrementBy="1" minValue="1" sequenceName="user_progress_seq" startValue="1"/>
+    </changeSet>
+</databaseChangeLog>
